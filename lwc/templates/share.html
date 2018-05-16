@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block jquery %}
+$signUpCount = {{count}};
+    function completeBlock(progressBarId){
+        $(progressBarId).css("width", "100%").text("Completed");
+    }
+
+    if($signUpCount == 0){
+
+    }else if($signUpCount > 0 && $signUpCount <5){
+    $newPercent = $signUpCount/5 * 100;
+    $("#count5").css("width", $newPercent + "%").text($newPercent + "%");
+    } else if($signUpCount >= 5 && $signUpCount < 15) {
+    completeBlock("#count5");
+    $newCount = $signUpCount - 5;
+    $newPercent = $newCount/10 * 100;
+    $("#count15").css("width", $newPercent + "%").text($newPercent + "%");
+    }else if($signUpCount >= 15 && $signUpCount < 25) {
+    completeBlock("#count5");
+    completeBlock("#count15");
+    $newCount = $signUpCount - 15;
+    $newPercent = $newCount/10 * 100;
+    $("#count25").css("width", $newPercent + "%").text($newPercent + "%");
+    }else if($signUpCount >= 25 && $signUpCount < 50) {
+    completeBlock("#count5");
+    completeBlock("#count15");
+    completeBlock("#count25");
+
+    $newCount = $signUpCount - 25;
+    $newPercent = $newCount/(50-25) * 100;
+    $("#count50").css("width", $newPercent + "%").attr("aria-valuenow", "$newPercent").text($newPercent + "%");
+    }else{
+        completeBlock("#count5");
+        completeBlock("#count15");
+        completeBlock("#count25");
+        completeBlock("#count50");
+    }
+{% endblock %}
+
+
+{% block content %}
+{% include "nav.html" %}
+      <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <img src="{% static 'img/launch.jpg' %}" class="img-fluid"/>
+                     </div>
+
+                    <div class="col-sm-6 text-center">
+                            <i class="fas fa-share-alt fa-5x"></i>
+                          <h1 class="display-3">Hello, world!</h1>
+                          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                          <div class="card">
+                              <div class="card-body text-center">
+                                {{ref_url}}
+                              </div>
+                          </div>
+                                <i class="fab fa-facebook-square fa-4x"></i>
+                                <i class="fab fa-twitter-square fa-4x"></i>
+                                <i class="fab fa-linkedin fa-4x"></i>
+                                <i class="fab fa-google-plus-square fa-4x"></i>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+      </div>
+        <div class="container">
+            friends Joined: {{count}}
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3>5 Friends Joined</h3>
+                    <div class="progress">
+                      <div id = "count5" class="progress-bar progress-bar-striped" style="width:0%">0%</div>
+                    </div>
+                    <h5>Rewards Included:</h5>
+                    <ul>
+                        <li>Reward 1</li>
+                        <li>Reward 2</li>
+                    </ul>
+                </div>
+
+                 <div class="col-sm-3">
+                    <h3>15 Joined</h3>
+                    <div class="progress">
+                      <div id="count15" class="progress-bar progress-bar-striped" style="width:0%">0%</div>
+                    </div>
+                    <h5>Rewards Included:</h5>
+                    <ul>
+                        <li>Reward 1</li>
+                        <li>Reward 2</li>
+                    </ul>
+                </div>
+
+                 <div class="col-sm-3">
+                    <h3>25 Joined</h3>
+                    <div class="progress">
+                      <div id="count25" class="progress-bar progress-bar-striped" style="width:0%">0%</div>
+                    </div>
+                    <h5>Rewards Included:</h5>
+                    <ul>
+                        <li>Reward 1</li>
+                        <li>Reward 2</li>
+                    </ul>
+                </div>
+
+                 <div class="col-sm-3">
+                    <h3>50 Joined</h3>
+                    <div class="progress">
+                      <div id="count50" class="progress-bar progress-bar-striped" style="width:0%">0%</div>
+                    </div>
+                    <h5>Rewards Included:</h5>
+                    <ul>
+                        <li>Reward 1</li>
+                        <li>Reward 2</li>
+                    </ul>
+                </div>
+
+             </div>
+        </div>
+
+{% endblock %}
